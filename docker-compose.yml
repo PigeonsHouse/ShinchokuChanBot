@@ -1,0 +1,14 @@
+version: '3'
+services:
+  db:
+    container_name: shinchoku_db
+    image: postgres:12
+    volumes:
+      - dbdata:/var/lib/postgresql/data/
+    env_file:
+      - .env
+    ports:
+      - '15432:5432'
+
+volumes:
+  dbdata: null

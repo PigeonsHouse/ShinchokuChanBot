@@ -1,0 +1,16 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+sqlalchemy = "*"
+psycopg2 = "==2.9.3"
+python-dotenv = "*"
+py-cord = {git = "https://github.com/Pycord-Development/pycord"}
+pydantic = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"
