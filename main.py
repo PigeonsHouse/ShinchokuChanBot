@@ -22,7 +22,7 @@ def view(duration):
     seconds = str(int(duration / timedelta(seconds=1)) % 60).zfill(2)
     minutes = str(int(duration / timedelta(minutes=1)) % 60).zfill(2)
     hours   = int(duration / timedelta(hours=1)) % 60
-    return_duration = f"{hours}:{minutes}:{seconds}"
+    return_duration = f'{hours}:{minutes}:{seconds}'
     return return_duration
 
 async def report_progress():
@@ -81,7 +81,7 @@ async def on_voice_state_update(member, before, after):
 #     if re.match(r'月が変わりました', content):
 #         await report_progress()
 
-@client.slash_command()
+@client.slash_command(description='月頭報告を行うチャンネルを設定')
 async def set_here(ctx: discord.ApplicationContext):
     await check_new_guild(ctx)
     guild_id = ctx.guild_id
@@ -93,7 +93,7 @@ async def set_here(ctx: discord.ApplicationContext):
         return
     await ctx.respond('月頭報告をこのチャンネルでするね！')
 
-@client.slash_command()
+@client.slash_command(description='作業時間の計測を開始(VCを抜けると計測終了)')
 async def start_task(ctx: discord.ApplicationContext, title: discord.Option(str, 'Input your task title') = 'test task'):
     user_vc = ctx.author.voice
     if user_vc is None:
@@ -127,7 +127,7 @@ async def start_task(ctx: discord.ApplicationContext, title: discord.Option(str,
         'channel': ctx.channel
     })
     
-@client.slash_command()
+@client.slash_command(description='作業時間の計測を開始(VCを抜けると計測終了)')
 async def end_task(ctx: discord.ApplicationContext):
     user_vc = ctx.author.voice
     if user_vc is None:
