@@ -9,6 +9,12 @@ services:
       - .env
     ports:
       - '15432:5432'
+  bot:
+    build: .
+    volumes:
+      - .:/opt
+    env_file:
+      - .env
 
 volumes:
   dbdata: null
