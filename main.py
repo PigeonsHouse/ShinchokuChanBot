@@ -75,11 +75,11 @@ async def on_voice_state_update(member, before, after):
                 watching_data_list.remove(watching_data)
                 return
 
-@client.event
-async def on_message(message):
-    content = message.content
-    if re.match(r'月が変わりました', content):
-        await report_progress()
+# @client.event
+# async def on_message(message):
+#     content = message.content
+#     if re.match(r'月が変わりました', content):
+#         await report_progress()
 
 @client.slash_command()
 async def set_here(ctx: discord.ApplicationContext):
