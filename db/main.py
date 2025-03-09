@@ -5,14 +5,18 @@ from sqlalchemy.orm import sessionmaker, Session
 
 load_dotenv()
 
-# DATABASE = 'postgresql'
-# USER = os.environ.get('POSTGRES_USER')
-# PASSWORD = os.environ.get('POSTGRES_PASSWORD')
-# HOST = os.environ.get('POSTGRES_HOST')
-# PORT = os.environ.get('POSTGRES_PORT', 5432)
-# DB_NAME = os.environ.get('POSTGRES_DB')
+DATABASE = 'postgresql'
+USER = os.environ.get('POSTGRES_USER')
+PASSWORD = os.environ.get('POSTGRES_PASSWORD')
+HOST = os.environ.get('POSTGRES_HOST')
+PORT = os.environ.get('POSTGRES_PORT', 5432)
+DB_NAME = os.environ.get('POSTGRES_DB')
 
-DATABASE_URL = os.environ.get('DATABASE_URL').replace('postgres://', 'postgresql://', 1)
+url = os.environ.get('DATABASE_URL')
+if url is None or url == '':
+	DATABASE_URL = f"{DATABASE}://{HOST}:{PORT}/{DB_NAME}?user={USER}&password={PASSWORD}"
+else:
+	DATABASE_URL = url.replace('postgres://', 'postgresql://', 1)
 
 engine = create_engine(DATABASE_URL)
 

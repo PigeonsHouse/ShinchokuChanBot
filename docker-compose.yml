@@ -1,4 +1,3 @@
-version: '3'
 services:
   db:
     container_name: shinchoku_db
@@ -9,12 +8,20 @@ services:
       - .env
     ports:
       - '15432:5432'
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "postgres" ]
+      interval: 1s
+      timeout: 3s
+      retries: 30
   bot:
     build: .
     volumes:
       - .:/opt
     env_file:
       - .env
+    depends_on:
+      db:
+        condition: service_healthy
 
 volumes:
   dbdata: null
